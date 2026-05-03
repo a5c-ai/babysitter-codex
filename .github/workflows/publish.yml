@@ -25,6 +25,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.A5C_RELEASE_TOKEN || github.token }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
