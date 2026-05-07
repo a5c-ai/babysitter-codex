@@ -33,13 +33,35 @@
         ]
       }
     ],
-    "OnToolCall": [
+    "PreToolUse": [
       {
         "matcher": ".*",
         "hooks": [
           {
             "type": "command",
-            "command": "npx -y -p @a5c-ai/hooks-mux-cli -c \"a5c-hooks-mux invoke --adapter codex --handler 'bash ./hooks/babysitter-proxied-on-tool-call.sh' --json\""
+            "command": "npx -y -p @a5c-ai/hooks-mux-cli -c \"a5c-hooks-mux invoke --adapter codex --handler 'bash ./hooks/babysitter-proxied-pre-tool-use.sh' --json\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y -p @a5c-ai/hooks-mux-cli -c \"a5c-hooks-mux invoke --adapter codex --handler 'bash ./hooks/babysitter-proxied-post-tool-use.sh' --json\""
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y -p @a5c-ai/hooks-mux-cli -c \"a5c-hooks-mux invoke --adapter codex --handler 'bash ./hooks/babysitter-proxied-session-end.sh' --json\""
           }
         ]
       }
