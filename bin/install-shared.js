@@ -104,7 +104,7 @@ function ensureMarketplaceEntry(marketplacePath, pluginRoot) {
     name: PLUGIN_NAME,
     source: relSource,
     description: "Orchestrate complex, multi-step workflows with event-sourced state management, hook-based extensibility, and human-in-the-loop approval",
-    version: "5.0.1-staging.dc2dc1847b5b",
+    version: "5.0.1-staging.9e5052f8bc95",
     author: { name: "a5c.ai" },
   };
   if (idx >= 0) marketplace.plugins[idx] = entry;
@@ -297,7 +297,7 @@ function renderCodexConfigToml() {
     'writable_roots = [".a5c", ".codex"]',
     '',
     '[features]',
-    'codex_hooks = true',
+    'hooks = true',
     'multi_agent = true',
     '',
     '[agents]',
@@ -406,7 +406,7 @@ function mergeCodexConfig(existing) {
   content = insertRootKey(content, 'sandbox_mode', 'sandbox_mode = "workspace-write"');
   content = insertRootKey(content, 'project_doc_max_bytes', 'project_doc_max_bytes = 65536');
   content = ensureWritableRoots(content);
-  content = ensureSectionLine(content, 'features', 'codex_hooks', 'codex_hooks = true');
+  content = ensureSectionLine(content, 'features', 'hooks', 'hooks = true');
   content = ensureSectionLine(content, 'features', 'multi_agent', 'multi_agent = true');
   content = ensureSectionLine(content, 'agents', 'max_depth', 'max_depth = 3');
   content = ensureSectionLine(content, 'agents', 'max_threads', 'max_threads = 4');
