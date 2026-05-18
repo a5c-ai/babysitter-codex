@@ -17,23 +17,36 @@ workspace-local Codex surface for team setup.
 
 ## Installation
 
-Install the SDK CLI first:
+Install the Babysitter CLI once:
 
 ```bash
-npm install -g @a5c-ai/babysitter-sdk
+npm install -g @a5c-ai/babysitter
 ```
 
-clone the repo and install the plugin globally:
+Install the Codex plugin through the SDK helper. This is the canonical path used by the installer tests and resolves to `npx --yes @a5c-ai/babysitter-codex install ...` under the hood:
 
 ```bash
-npx -y @a5c-ai/babysitter-codex install --global
+# Global install
+babysitter harness:install-plugin codex
 
-codex
-
-> /plugins
+# Workspace install
+babysitter harness:install-plugin codex --workspace /path/to/repo
 ```
 
-then navigate to the 'babysitter' entry and select 'Install'.
+You can also run the published package installer directly:
+
+```bash
+npx --yes @a5c-ai/babysitter-codex install --global
+npx --yes @a5c-ai/babysitter-codex install --workspace /path/to/repo
+```
+
+Then open Codex and finish enabling the plugin from the plugin UI:
+
+```text
+/plugins
+```
+
+Navigate to the `babysitter` entry and select `Install`.
 
 If Codex was already open when you ran `install --global`, start a new thread
 after installing from `/plugins` before expecting `babysitter:*` skills such as
