@@ -1,6 +1,6 @@
 {
   "name": "babysitter",
-  "version": "5.0.1-staging.b3bfcc2487ad",
+  "version": "5.0.1-staging.42ad28623a92",
   "description": "Orchestrate complex, multi-step workflows with event-sourced state management, hook-based extensibility, and human-in-the-loop approval",
   "author": {
     "name": "a5c.ai",
