@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash ./hooks/babysitter-proxied-session-start.sh\" --json"
+            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-session-start.sh\" --json"
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash ./hooks/babysitter-proxied-stop.sh\" --json"
+            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-stop.sh\" --json"
           }
         ]
       }
@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash ./hooks/babysitter-proxied-user-prompt-submit.sh\" --json"
+            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-user-prompt-submit.sh\" --json"
           }
         ]
       }
@@ -39,7 +39,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash ./hooks/babysitter-proxied-pre-tool-use.sh\" --json"
+            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-pre-tool-use.sh\" --json"
           }
         ]
       }
@@ -50,7 +50,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash ./hooks/babysitter-proxied-post-tool-use.sh\" --json"
+            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-post-tool-use.sh\" --json"
           }
         ]
       }
@@ -61,7 +61,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash ./hooks/babysitter-proxied-session-end.sh\" --json"
+            "command": "a5c-hooks-mux invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-session-end.sh\" --json"
           }
         ]
       }
