@@ -62,8 +62,8 @@ codex plugin marketplace add ./path/to/babysitter
 Then browse and install:
 
 ```bash
-codex plugin list --source babysitter
-codex plugin install babysitter --source babysitter
+codex plugin list --marketplace babysitter
+codex plugin add babysitter --marketplace babysitter
 ```
 
 Other marketplace commands:
