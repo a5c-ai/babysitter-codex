@@ -29,7 +29,7 @@ function writeFileIfChanged(filePath, contents) {
   try {
     const existing = fs.readFileSync(filePath, 'utf8');
     if (existing === contents) return false;
-  } catch {}
+  } catch (e) { process.stderr.write('[extensions-adapter] file read failed for ' + filePath + ', overwriting: ' + (e instanceof Error ? e.message : String(e)) + '\n'); }
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, contents);
   return true;
@@ -82,7 +82,7 @@ function writeJson(filePath, value) {
 function ensureExecutable(filePath) {
   try {
     fs.chmodSync(filePath, 0o755);
-  } catch {}
+  } catch (e) { process.stderr.write('[extensions-adapter] chmod failed for ' + filePath + ': ' + (e instanceof Error ? e.message : String(e)) + '\n'); }
 }
 
 function normalizeMarketplaceSourcePath(source, marketplacePath) {
@@ -104,7 +104,7 @@ function ensureMarketplaceEntry(marketplacePath, pluginRoot) {
     name: PLUGIN_NAME,
     source: relSource,
     description: "Orchestrate complex, multi-step workflows with event-sourced state management, hook-based extensibility, and human-in-the-loop approval",
-    version: "5.0.1-staging.dfac8e4a",
+    version: "6.0.0",
     author: { name: "a5c.ai" },
   };
   if (idx >= 0) marketplace.plugins[idx] = entry;
@@ -130,7 +130,7 @@ function runPostInstall(pluginRoot) {
   if (fs.existsSync(postInstall)) {
     spawnSync(process.execPath, [postInstall], {
       cwd: pluginRoot, stdio: 'inherit',
-      env: { ...process.env, PLUGIN_ROOT: pluginRoot },
+      env: { ...process.env, PLUGIN_ROOT: pluginRoot, CLAUDE_PLUGIN_ROOT: pluginRoot },
     });
   }
 }
@@ -147,7 +147,7 @@ function resolveCliCommand(packageRoot) {
   const versionsPath = path.join(packageRoot, 'versions.json');
   const versions = readJson(versionsPath) || {};
   const ver = versions.sdkVersion || 'latest';
-  return `npx -y @a5c-ai/babysitter-sdk@${ver}`;
+  return `npm exec --yes --package @a5c-ai/babysitter-sdk@${ver} -- babysitter`;
 }
 
 function runCli(packageRoot, cliArgs, options = {}) {
@@ -297,7 +297,7 @@ function renderCodexConfigToml() {
     'writable_roots = [".a5c", ".codex"]',
     '',
     '[features]',
-    'codex_hooks = true',
+    'hooks = true',
     'multi_agent = true',
     '',
     '[agents]',
@@ -406,7 +406,7 @@ function mergeCodexConfig(existing) {
   content = insertRootKey(content, 'sandbox_mode', 'sandbox_mode = "workspace-write"');
   content = insertRootKey(content, 'project_doc_max_bytes', 'project_doc_max_bytes = 65536');
   content = ensureWritableRoots(content);
-  content = ensureSectionLine(content, 'features', 'codex_hooks', 'codex_hooks = true');
+  content = ensureSectionLine(content, 'features', 'hooks', 'hooks = true');
   content = ensureSectionLine(content, 'features', 'multi_agent', 'multi_agent = true');
   content = ensureSectionLine(content, 'agents', 'max_depth', 'max_depth = 3');
   content = ensureSectionLine(content, 'agents', 'max_threads', 'max_threads = 4');
