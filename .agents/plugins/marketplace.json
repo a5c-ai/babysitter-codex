@@ -1,0 +1,22 @@
+{
+  "name": "babysitter",
+  "version": "6.0.1-staging.040275fa2b1f",
+  "interface": {
+    "displayName": "Babysitter"
+  },
+  "plugins": [
+    {
+      "name": "babysitter",
+      "version": "6.0.1-staging.040275fa2b1f",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Coding"
+    }
+  ]
+}
