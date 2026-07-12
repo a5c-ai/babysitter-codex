@@ -27,13 +27,13 @@ or remove only the scratch data you created before returning.
 Read the SDK version from `versions.json` to ensure version compatibility:
 
 ```bash
-SDK_VERSION=$(node -e "try{console.log(JSON.parse(require('fs').readFileSync('${PLUGIN_ROOT}/versions.json','utf8')).sdkVersion||'latest')}catch{console.log('latest')}")
+SDK_VERSION=$(node -e "try{console.log(JSON.parse(require('fs').readFileSync(process.argv[1],'utf8')).sdkVersion||'latest')}catch{console.log('latest')}" "${PLUGIN_ROOT}/versions.json")
 npm i -g @a5c-ai/babysitter-sdk@$SDK_VERSION || npm i -g @a5c-ai/babysitter-sdk@latest
 
-if command -v babysitter >/dev/null 2>&1 && babysitter --version >/dev/null 2>&1; then
-  CLI="babysitter"
+if command -v babysitter >/dev/null 2>&1 && [ "$(babysitter --version 2>/dev/null)" = "$SDK_VERSION" ]; then
+  CLI=(babysitter)
 else
-  CLI="npm exec --yes --package @a5c-ai/babysitter-sdk@$SDK_VERSION -- babysitter"
+  CLI=(npm exec --yes --package "@a5c-ai/babysitter-sdk@$SDK_VERSION" -- babysitter)
 fi
 ```
 
@@ -50,13 +50,13 @@ Make sure `jq` is installed and available in the path. If not, install it.
 Run the following command to get full instructions:
 
 ```bash
-$CLI instructions:babysit-skill --harness codex --interactive
+"${CLI[@]}" instructions:babysit-skill --harness codex --interactive
 ```
 
 For non-interactive mode (running with `-p` flag or no AskUserQuestion tool):
 
 ```bash
-$CLI instructions:babysit-skill --harness codex --no-interactive
+"${CLI[@]}" instructions:babysit-skill --harness codex --no-interactive
 ```
 
 Follow the instructions returned by the command above to orchestrate the run.

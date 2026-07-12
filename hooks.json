@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "adapters-hooks invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-session-start.sh\" --json"
+            "command": "bash \"${PLUGIN_ROOT:-$HOME/.codex}/hooks/babysitter-proxied-session-start.sh\""
           }
         ]
       }
@@ -17,18 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "adapters-hooks invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-stop.sh\" --json"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "matcher": ".*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "adapters-hooks invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-user-prompt-submit.sh\" --json"
+            "command": "bash \"${PLUGIN_ROOT:-$HOME/.codex}/hooks/babysitter-proxied-stop.sh\""
           }
         ]
       }
@@ -39,29 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "adapters-hooks invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-pre-tool-use.sh\" --json"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": ".*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "adapters-hooks invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-post-tool-use.sh\" --json"
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "matcher": ".*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "adapters-hooks invoke --adapter codex --handler \"bash .codex/hooks/babysitter-proxied-session-end.sh\" --json"
+            "command": "bash \"${PLUGIN_ROOT:-$HOME/.codex}/hooks/babysitter-proxied-pre-tool-use.sh\""
           }
         ]
       }

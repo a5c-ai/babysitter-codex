@@ -236,11 +236,25 @@ const LEGACY_HOOK_SCRIPT_NAMES = [
   'babysitter-session-start.sh',
   'babysitter-stop-hook.sh',
   'user-prompt-submit.sh',
+  'babysitter-proxied-session-start.sh',
+  'babysitter-proxied-stop.sh',
+  'babysitter-proxied-user-prompt-submit.sh',
+  'babysitter-proxied-pre-tool-use.sh',
+  'babysitter-proxied-post-tool-use.sh',
+  'babysitter-proxied-session-end.sh',
 ];
 const MANAGED_HOOK_SCRIPT_NAMES = [
   'babysitter-proxied-session-start.sh',
   'babysitter-proxied-stop.sh',
-  'babysitter-proxied-user-prompt-submit.sh',
+  'babysitter-proxied-pre-tool-use.sh',
+];
+const LEGACY_HOOK_EVENT_NAMES = [
+  'SessionStart',
+  'Stop',
+  'UserPromptSubmit',
+  'PreToolUse',
+  'PostToolUse',
+  'SessionEnd',
 ];
 const DEFAULT_MARKETPLACE = {
   name: 'local-plugins',
@@ -617,7 +631,7 @@ function removeLegacyCodexSurface(codexHome) {
   if (!hooksConfig.hooks || typeof hooksConfig.hooks !== 'object') {
     return;
   }
-  for (const eventName of ['SessionStart', 'UserPromptSubmit', 'Stop']) {
+  for (const eventName of LEGACY_HOOK_EVENT_NAMES) {
     const eventHooks = Array.isArray(hooksConfig.hooks[eventName]) ? hooksConfig.hooks[eventName] : [];
     const filteredMatchers = eventHooks
       .map((matcher) => {
@@ -786,6 +800,7 @@ module.exports = {
   LEGACY_SKILL_NAMES,
   LEGACY_PROMPT_NAMES,
   LEGACY_HOOK_SCRIPT_NAMES,
+  LEGACY_HOOK_EVENT_NAMES,
   MANAGED_HOOK_SCRIPT_NAMES,
   getCodexHome,
   getHomePluginRoot,
