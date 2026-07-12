@@ -6,6 +6,7 @@
     "test": "npm run validate:ci",
     "test:integration": "node test/integration.test.js",
     "test:packaged-install": "node test/packaged-install.test.js",
+    "validate:hooks": "node scripts/validate-hooks.js",
     "validate:ci": "npm run test:integration && npm run test:packaged-install",
     "team:install": "node scripts/team-install.js",
     "deploy": "npm publish --access public",

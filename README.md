@@ -103,8 +103,11 @@ The plugin provides:
 
 - `skills/babysit/SKILL.md` as the core entrypoint
 - mode wrapper skills such as `$call`, `$plan`, and `$resume`
-- plugin-level lifecycle hooks for `SessionStart`, `UserPromptSubmit`, and
-  `Stop`
+- plugin-level lifecycle hooks for `SessionStart`, `PreToolUse`, and `Stop`
+
+All three hooks receive Codex's native payload directly. This preserves tool
+rewrites and completion-proof tags, while `SessionStart` binds Codex's native
+session ID to Babysitter's unified session environment.
 
 The process library is fetched and bound through the SDK CLI in
 `~/.a5c/active/process-library.json`.

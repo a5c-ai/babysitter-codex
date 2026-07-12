@@ -1,11 +1,21 @@
 #!/bin/bash
-# Session Start — installs SDK if needed, then runs hook handler.
+# Session Start — resolves the pinned SDK, then runs the hook handler.
 set -euo pipefail
 PLUGIN_ROOT="${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}}"
-SDK_VERSION=$(node -e "try{console.log(JSON.parse(require('fs').readFileSync('${PLUGIN_ROOT}/versions.json','utf8')).sdkVersion||'latest')}catch{console.log('latest')}" 2>/dev/null || echo "latest")
-if ! command -v babysitter &>/dev/null; then
-  npm i -g "@a5c-ai/babysitter-sdk@${SDK_VERSION}" --loglevel=error 2>/dev/null || \
-  npm i -g "@a5c-ai/babysitter-sdk@${SDK_VERSION}" --prefix "$HOME/.local" --loglevel=error 2>/dev/null || true
-  [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+SDK_VERSION=$(node -e "try{console.log(JSON.parse(require('fs').readFileSync(process.argv[1],'utf8')).sdkVersion||'latest')}catch{console.log('latest')}" "${PLUGIN_ROOT}/versions.json")
+SESSION_ID=$(node -e "let input=''; process.stdin.on('data', chunk => input += chunk); process.stdin.on('end', () => { try { process.stdout.write(JSON.parse(input).session_id || '') } catch {} })")
+
+if [ -z "$SESSION_ID" ]; then
+  printf '{}\n'
+  exit 0
 fi
-babysitter hook:run --harness unified --hook-type session-start --json
+
+export AGENT_SESSION_ID="$SESSION_ID"
+
+if command -v babysitter >/dev/null 2>&1 && [ "$(babysitter --version 2>/dev/null)" = "$SDK_VERSION" ]; then
+  CLI=(babysitter)
+else
+  CLI=(npm exec --yes --package "@a5c-ai/babysitter-sdk@$SDK_VERSION" -- babysitter)
+fi
+
+"${CLI[@]}" hook:run --harness unified --hook-type session-start --json
