@@ -1,13 +1,13 @@
 {
   "name": "babysitter",
-  "version": "6.0.3-staging.a92992776c25",
+  "version": "6.0.3-staging.f5f113c68e2c",
   "interface": {
     "displayName": "Babysitter"
   },
   "plugins": [
     {
       "name": "babysitter",
-      "version": "6.0.3-staging.a92992776c25",
+      "version": "6.0.3-staging.f5f113c68e2c",
       "source": {
         "source": "local",
         "path": "./"
