@@ -1,6 +1,6 @@
 {
   "name": "@a5c-ai/babysitter-codex",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "description": "Orchestrate complex, multi-step workflows with event-sourced state management, hook-based extensibility, and human-in-the-loop approval",
   "scripts": {
     "test": "npm run validate:ci",
@@ -21,8 +21,10 @@
     "hooks.json",
     "skills/",
     ".app.json",
+    "versions.json",
     "bin/",
     "scripts/",
+    "test/",
     "plugin.lock.json",
     "README.md"
   ],
